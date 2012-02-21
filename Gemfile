@@ -4,6 +4,7 @@ gem "em-synchrony"
 gem "daemons"
 gem "activesupport", ">= 3.0.0"
 gem "redis", ">= 2.2.0"
+gem "hiredis", ">= 0.3.1"
 gem "i18n"
 
 # Add dependencies to develop your gem here.
