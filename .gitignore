@@ -27,8 +27,8 @@ pkg
 # Not sure what to needs to be ignored for particular editors/OSes? Here's some ideas to get you started. (Remember, remove the leading # of the line)
 #
 # For MacOS:
-#
-#.DS_Store
+
+.DS_Store
 
 # For TextMate
 #*.tmproj
@@ -47,3 +47,7 @@ pkg
 
 # For rubinius:
 #*.rbc
+
+# For testing locally
+test/dirty_script.rb
+dirty_server_script.rb
