@@ -4,4 +4,3 @@ require 'active_support/json'
 require 'logger'
 require 'apnmachine/config'
 require 'apnmachine/notification'
-

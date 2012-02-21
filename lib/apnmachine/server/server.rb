@@ -3,8 +3,8 @@ module ApnMachine
     class Server
         attr_accessor :client, :bind_address, :port, :redis
 
-      def initialize(pem, redis_host = '127.0.0.1', redis_port = 6379, log = '/apnmachined.log')
-        @client = ApnMachine::Server::Client.new(pem)
+      def initialize(pem, pem_passphrase = nil, redis_host = '127.0.0.1', redis_port = 6379, apn_host = 'gateway.push.apple.com', apn_port = 2195, log = '/apnmachined.log')
+        @client = ApnMachine::Server::Client.new(pem, pem_passphrase, apn_host, apn_port)
         @redis = Redis.new(:host => redis_host, :port => redis_port)
     
         #set logging options
@@ -15,6 +15,7 @@ module ApnMachine
           Config.logger = Logger.new(@flog, 'daily')
         else
           require 'fileutils'
+          p log
           FileUtils.mkdir_p(File.dirname(log))
   	      @flog = File.open(log, File::WRONLY | File::APPEND | File::CREAT)
           Config.logger = Logger.new(@flog, 'daily')

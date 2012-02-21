@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+#$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 
 require 'getoptlong'
 require 'daemons'
@@ -26,19 +27,23 @@ def daemonize
 end
 
 opts = GetoptLong.new(
-  ["--redis-host", "-b", GetoptLong::REQUIRED_ARGUMENT],
+  ["--redis-host", "-a", GetoptLong::REQUIRED_ARGUMENT],
   ["--redis-port", "-p", GetoptLong::REQUIRED_ARGUMENT],
-  ["--server", "-s", GetoptLong::REQUIRED_ARGUMENT],
+  ["--apn-host", "-b", GetoptLong::REQUIRED_ARGUMENT],
+  ["--apn-port", "-q", GetoptLong::REQUIRED_ARGUMENT],
   ["--log", "-l", GetoptLong::REQUIRED_ARGUMENT],
-  ["--pem", "-c", GetoptLong::REQUIRED_ARGUMENT],
+  ["--pem", "-c", GetoptLong::REQUIRED_ARGUMENT], 
+  ["--pem-passphrase", "-s", GetoptLong::REQUIRED_ARGUMENT],
   ["--daemon", "-d", GetoptLong::NO_ARGUMENT],
   ["--help", "-h", GetoptLong::NO_ARGUMENT]
 )
 
 redis_host = '127.0.0.1'
 redis_port = 6379
-host = 'gateway.push.apple.com'
+apn_host = 'gateway.push.apple.com'
+apn_port = 2195
 pem = nil
+pem_passphrase = nil
 daemon = false
 log = STDOUT
 
@@ -51,14 +56,18 @@ opts.each do |opt, arg|
     redis_host = arg
   when '--redis-port'
     redis_port = arg.to_i
-  when '--server'
+  when '--apn_host'
     if arg == 'sandbox'
-      host = 'gateway.sandbox.push.apple.com'
+      apn_host = 'gateway.sandbox.push.apple.com'
     else
-      raise 'Wrong --server option. Pass "sandbox" as option to override production servers'
+      apn_host = arg 
     end
+  when '--apn-port'
+    apn_port = arg
   when '--pem'
     pem = arg
+  when '--pem-passphrase'
+    pem_passphrase = arg
   when '--daemon'
     daemon = true
   when '--log'
@@ -71,6 +80,6 @@ if pem.nil?
   exit 1
 else
   daemonize if daemon
-  server = ApnMachine::Server::Server.new(pem, redis_host, redis_port, log)
+  server = ApnMachine::Server::Server.new(pem, pem_passphrase, redis_host, redis_port, apn_host, apn_port, log)
   server.start!
 end

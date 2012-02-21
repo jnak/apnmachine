@@ -27,7 +27,7 @@ That's it.
 
 <pre>
   <code>
-Usage: apnmachined [options] --pem /path/to/pem
+Usage: apnmachined [options] --pem /full/path/to/pem
   --redis-host bind address (defaults to 127.0.0.1)
     address of your redis server
 

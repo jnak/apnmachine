@@ -1,17 +1,17 @@
 module ApnMachine
   module Server
     class Client
-      attr_accessor :pem, :host, :port, :password, :key, :cert, :close_callback
+      attr_accessor :pem, :apn_host, :apn_port, :password, :key, :cert, :close_callback
 
-      def initialize(pem, host = 'gateway.push.apple.com', port = 2195, pass = nil)
-        @pem, @host, @port, @password = pem, host, port, pass
+      def initialize(pem, password = nil, apn_host = 'gateway.push.apple.com', apn_port = 2195)
+        @pem, @pasword, @apn_host, @apn_port = pem, password, apn_host, apn_port
       end
 
       def connect!
         raise "The path to your pem file is not set." unless @pem
         raise "The path to your pem file does not exist!" unless File.exist?(@pem)
         @key, @cert = @pem, @pem
-        @connection = EM.connect(host, port, ApnMachine::Server::ServerConnection, self)
+        @connection = EM.connect(apn_host, apn_port, ApnMachine::Server::ServerConnection, self)
       end
         
       def disconnect!
