@@ -7,7 +7,7 @@ require 'apnmachine/server'
 
 def usage
   puts "Usage: apnmchined [switches] --pem <path>"
-  puts " --redis-address [127.0.0.1]             bind address of proxy"
+  puts " --redis-host [127.0.0.1]             bind address of proxy"
   puts " --redis-port [6379]                 port proxy listens on"
   puts " --server <gateway.push.apple.com>    the apn server to send messages to"
   puts " --log </var/log/apnmachined.log       the path to store the log"
@@ -26,7 +26,7 @@ def daemonize
 end
 
 opts = GetoptLong.new(
-  ["--redis-address", "-b", GetoptLong::REQUIRED_ARGUMENT],
+  ["--redis-host", "-b", GetoptLong::REQUIRED_ARGUMENT],
   ["--redis-port", "-p", GetoptLong::REQUIRED_ARGUMENT],
   ["--server", "-s", GetoptLong::REQUIRED_ARGUMENT],
   ["--log", "-l", GetoptLong::REQUIRED_ARGUMENT],
@@ -47,9 +47,9 @@ opts.each do |opt, arg|
   when '--help'
     usage
     exit 1
-  when '--redis-address'
-    redis_address = arg
-  when '--port'
+  when '--redis-host'
+    redis_host = arg
+  when '--redis-port'
     redis_port = arg.to_i
   when '--server'
     if arg == 'sandbox'
@@ -71,6 +71,6 @@ if pem.nil?
   exit 1
 else
   daemonize if daemon
-  server = ApnMachine::Server::Server.new(pem, redis_address, redis_port, log)
+  server = ApnMachine::Server::Server.new(pem, redis_host, redis_port, log)
   server.start!
 end

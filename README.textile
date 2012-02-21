@@ -28,10 +28,10 @@ That's it.
 <pre>
   <code>
 Usage: apnmachined [options] --pem /path/to/pem
-  --address bind address (defaults to 127.0.0.1)
+  --redis-host bind address (defaults to 127.0.0.1)
     address of your redis server
 
-  --port port
+  --redis-port port
     the port of your redis server (defaults to)
 
   --apn-address server

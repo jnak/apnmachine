@@ -3,10 +3,9 @@ module ApnMachine
     class Server
         attr_accessor :client, :bind_address, :port, :redis
 
-      def initialize(pem, redis_address, redis_port, log = '/apnmachined.log')
+      def initialize(pem, redis_host = '127.0.0.1', redis_port = 6379, log = '/apnmachined.log')
         @client = ApnMachine::Server::Client.new(pem)
-        @bind_address, @port  = bind_address, redis_port
-        @redis = Redis.new
+        @redis = Redis.new(:host => redis_host, :port => redis_port)
     
         #set logging options
         if log == STDOUT
