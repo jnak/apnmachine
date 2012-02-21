@@ -1,0 +1,76 @@
+#!/usr/bin/env ruby
+
+require 'getoptlong'
+require 'daemons'
+require 'apnmachine'
+require 'apnmachine/server'
+
+def usage
+  puts "Usage: apnmchined [switches] --pem <path>"
+  puts " --redis-address [127.0.0.1]             bind address of proxy"
+  puts " --redis-port [6379]                 port proxy listens on"
+  puts " --server <gateway.push.apple.com>    the apn server to send messages to"
+  puts " --log </var/log/apnmachined.log       the path to store the log"
+  puts " --daemon                             to daemonize the server"
+  puts " --help                               this message"
+end
+
+def daemonize
+  options = {
+      :backtrace  => true,
+      :ontop      => false,
+      :log_output => true,
+      :app_name => 'apnmachined'
+    }
+  Daemons.daemonize(options)
+end
+
+opts = GetoptLong.new(
+  ["--redis-address", "-b", GetoptLong::REQUIRED_ARGUMENT],
+  ["--redis-port", "-p", GetoptLong::REQUIRED_ARGUMENT],
+  ["--server", "-s", GetoptLong::REQUIRED_ARGUMENT],
+  ["--log", "-l", GetoptLong::REQUIRED_ARGUMENT],
+  ["--pem", "-c", GetoptLong::REQUIRED_ARGUMENT],
+  ["--daemon", "-d", GetoptLong::NO_ARGUMENT],
+  ["--help", "-h", GetoptLong::NO_ARGUMENT]
+)
+
+redis_address = '127.0.0.1'
+redis_port = 6379
+host = 'gateway.push.apple.com'
+pem = nil
+daemon = false
+log = STDOUT
+
+opts.each do |opt, arg|
+  case opt
+  when '--help'
+    usage
+    exit 1
+  when '--redis-address'
+    redis_address = arg
+  when '--port'
+    redis_port = arg.to_i
+  when '--server'
+    if arg == 'sandbox'
+      host = 'gateway.sandbox.push.apple.com'
+    else
+      raise 'Wrong --server option. Pass "sandbox" as option to override production servers'
+    end
+  when '--pem'
+    pem = arg
+  when '--daemon'
+    daemon = true
+  when '--log'
+    log = arg
+  end
+end
+
+if pem.nil?
+  usage
+  exit 1
+else
+  daemonize if daemon
+  server = ApnMachine::Server::Server.new(pem, redis_address, redis_port, log)
+  server.start!
+end

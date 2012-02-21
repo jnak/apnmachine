@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "apnmachine"
   gem.homepage = "http://github.com/jnak/apnmachine"
   gem.license = "MIT"
-  gem.summary = %Q{An EventMachine APN server & a Redis-backed library used in production at Zapkast to push iOS notifications}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{An APN server & library built on top of Redis and EventMachine}
+  gem.description = %Q{An APN server & library in which EventMachine daemons maintain a persistent connection to Apple servers and Redis acts as the glue with your Apps. See Readme for more info :)}
   gem.email = "julien.nakache@gmail.com"
   gem.authors = ["Julien Nakache"]
   # dependencies defined in Gemfile
@@ -32,13 +32,13 @@ Rake::TestTask.new(:test) do |test|
   test.verbose = true
 end
 
-require 'rcov/rcovtask'
-Rcov::RcovTask.new do |test|
-  test.libs << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
-  test.rcov_opts << '--exclude "gems/*"'
-end
+# require 'simplecov'
+# Simplecov::SimplecovTask.new do |test|
+#   test.libs << 'test'
+#   test.pattern = 'test/**/test_*.rb'
+#   test.verbose = true
+#   test.rcov_opts << '--exclude "gems/*"'
+# end
 
 task :default => :test
 
