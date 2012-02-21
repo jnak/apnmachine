@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
     "README.textile"
   ]
   s.files = [
+    ".DS_Store",
     ".document",
     "Gemfile",
     "Gemfile.lock",
@@ -25,6 +26,7 @@ Gem::Specification.new do |s|
     "README.textile",
     "Rakefile",
     "VERSION",
+    "apnmachine.gemspec",
     "bin/apnmachined",
     "lib/.DS_Store",
     "lib/apnmachine.rb",
