@@ -15,7 +15,6 @@ module ApnMachine
           Config.logger = Logger.new(@flog, 'daily')
         else
           require 'fileutils'
-          p log
           FileUtils.mkdir_p(File.dirname(log))
   	      @flog = File.open(log, File::WRONLY | File::APPEND | File::CREAT)
           Config.logger = Logger.new(@flog, 'daily')
