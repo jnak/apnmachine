@@ -19,7 +19,7 @@ module ApnMachine
       end
 
       def write(notif_bin)
-        Config.logger.debug "#{Time.now} [#{host}:#{port}] New notif"
+        Config.logger.debug "#{Time.now} New notif"
         @connection.send_data(notif_bin)
       end
 
