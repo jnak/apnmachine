@@ -1,6 +1,7 @@
 # rcov generated
 coverage
 coverage.data
+.document
 
 # rdoc generated
 rdoc
@@ -11,7 +12,7 @@ doc
 
 # bundler
 .bundle
-.Gemfile.lock
+Gemfile.lock
 
 # jeweler generated
 pkg
