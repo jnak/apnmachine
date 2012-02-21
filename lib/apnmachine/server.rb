@@ -1,4 +1,3 @@
-require 'openssl'
 require 'em-synchrony'
 require 'redis/connection/synchrony'
 require 'redis'
