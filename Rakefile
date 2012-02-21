@@ -12,6 +12,7 @@ end
 require 'rake'
 
 require 'jeweler'
+require './lib/apnmachine/version.rb'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "apnmachine"
@@ -21,6 +22,7 @@ Jeweler::Tasks.new do |gem|
   gem.description = %Q{An APN server & library in which EventMachine daemons maintain a persistent connection to Apple servers and Redis acts as the glue with your Apps. See Readme for more info :)}
   gem.email = "julien.nakache@gmail.com"
   gem.authors = ["Julien Nakache"]
+  gem.version = ApnMachine::VERSION
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
