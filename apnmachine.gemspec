@@ -4,37 +4,28 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{apnmachine}
+  s.name = "apnmachine"
   s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = [%q{Julien Nakache}]
-  s.date = %q{2012-02-21}
-  s.description = %q{An APN server & library in which EventMachine daemons maintain a persistent connection to Apple servers and Redis acts as the glue with your Apps. See Readme for more info :)}
-  s.email = %q{julien.nakache@gmail.com}
-  s.executables = [%q{apnmachined}]
+  s.authors = ["Julien Nakache"]
+  s.date = "2012-02-21"
+  s.description = "An APN server & library in which EventMachine daemons maintain a persistent connection to Apple servers and Redis acts as the glue with your Apps. See Readme for more info :)"
+  s.email = "julien.nakache@gmail.com"
+  s.executables = ["apnmachined"]
   s.extra_rdoc_files = [
-    "LICENSE.txt",
     "README.textile"
   ]
   s.files = [
-    ".DS_Store",
-    ".document",
     "Gemfile",
-    "Gemfile.lock",
-    "LICENSE.txt",
     "README.textile",
     "Rakefile",
-    "VERSION",
     "apnmachine.gemspec",
     "bin/apnmachined",
-    "lib/.DS_Store",
     "lib/apnmachine.rb",
-    "lib/apnmachine/.DS_Store",
     "lib/apnmachine/config.rb",
     "lib/apnmachine/notification.rb",
     "lib/apnmachine/server.rb",
-    "lib/apnmachine/server/.DS_Store",
     "lib/apnmachine/server/client.rb",
     "lib/apnmachine/server/error_response.rb",
     "lib/apnmachine/server/response.rb",
@@ -44,11 +35,11 @@ Gem::Specification.new do |s|
     "test/helper.rb",
     "test/test_apnmachine.rb"
   ]
-  s.homepage = %q{http://github.com/jnak/apnmachine}
-  s.licenses = [%q{MIT}]
-  s.require_paths = [%q{lib}]
-  s.rubygems_version = %q{1.8.5}
-  s.summary = %q{An APN server & library built on top of Redis and EventMachine}
+  s.homepage = "http://github.com/jnak/apnmachine"
+  s.licenses = ["MIT"]
+  s.require_paths = ["lib"]
+  s.rubygems_version = "1.8.17"
+  s.summary = "An APN server & library built on top of Redis and EventMachine"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3

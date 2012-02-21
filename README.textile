@@ -1,4 +1,4 @@
-h1. Apple Push Notification Server Toolkit
+h1. Apn Server & Library for Ruby
 
 * http://github.com/jnak/apnmachine
 
@@ -20,7 +20,7 @@ h2. Remaining Tasks
  * Implement feedback service mechanism
  * Write real tests
 
-h2. APN Server Daemon
+h2. ApnMachine Daemon
 
 To start ApnMachine, tell it where is your redis server and the complete path to your PEM file.
 That's it.
