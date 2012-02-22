@@ -65,7 +65,7 @@ in an EventMachine program or a plain vanilla Rails app.
 
 <pre>
   <code>
-  ApnMachine::Config.port = @a_redis_client
+  ApnMachine::Config.redis = @any_redis_client
   ApnMachine::Config.logger = Rails.logger
   </code>
 </pre>
