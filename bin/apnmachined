@@ -40,6 +40,8 @@ opts = GetoptLong.new(
   ["--help", "-h", GetoptLong::NO_ARGUMENT]
 )
 
+$stdout.sync = true
+
 redis_host = '127.0.0.1'
 redis_port = 6379
 apn_host = 'gateway.push.apple.com'
