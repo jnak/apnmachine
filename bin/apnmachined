@@ -49,6 +49,8 @@ pem_passphrase = nil
 daemon = false
 log = STDOUT
 
+$stdout.sync = true
+
 opts.each do |opt, arg|
   case opt
   when '--help'
