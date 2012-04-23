@@ -2,7 +2,7 @@ source "http://rubygems.org"
 # Add dependencies required to use your gem here.
 gem "em-synchrony"
 gem "daemons"
-gem "activesupport", ">= 3.0.0"
+gem 'yajl-ruby'
 gem "redis", ">= 2.2.0"
 gem "hiredis", ">= 0.3.1"
 gem "i18n"

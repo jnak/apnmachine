@@ -47,7 +47,7 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<em-synchrony>, [">= 0"])
       s.add_runtime_dependency(%q<daemons>, [">= 0"])
-      s.add_runtime_dependency(%q<activesupport>, [">= 3.0.0"])
+      s.add_runtime_dependency(%q<yajl-ruby>, ["~> 1.1.0"])
       s.add_runtime_dependency(%q<redis>, [">= 2.2.0"])
       s.add_runtime_dependency(%q<hiredis>, [">= 0.3.1"])
       s.add_runtime_dependency(%q<i18n>, [">= 0"])
@@ -59,7 +59,7 @@ Gem::Specification.new do |s|
     else
       s.add_dependency(%q<em-synchrony>, [">= 0"])
       s.add_dependency(%q<daemons>, [">= 0"])
-      s.add_dependency(%q<activesupport>, [">= 3.0.0"])
+      s.add_dependency(%q<yajl-ruby>, ["~> 1.1.0"])
       s.add_dependency(%q<redis>, [">= 2.2.0"])
       s.add_dependency(%q<hiredis>, [">= 0.3.1"])
       s.add_dependency(%q<i18n>, [">= 0"])
@@ -72,7 +72,7 @@ Gem::Specification.new do |s|
   else
     s.add_dependency(%q<em-synchrony>, [">= 0"])
     s.add_dependency(%q<daemons>, [">= 0"])
-    s.add_dependency(%q<activesupport>, [">= 3.0.0"])
+    s.add_dependency(%q<yajl-ruby>, ["~> 1.1.0"])
     s.add_dependency(%q<redis>, [">= 2.2.0"])
     s.add_dependency(%q<hiredis>, [">= 0.3.1"])
     s.add_dependency(%q<i18n>, [">= 0"])
