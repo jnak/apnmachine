@@ -34,9 +34,9 @@ Usage: apnmachined [options] --pem /full/path/to/pem
   --redis-port port
     the port of your redis server (defaults to)
 
-  --apn-address server
-    APN Server (defaults to gateway.push.apple.com)
-		Use 'sandbox' to connect to gateway.sandbox.push.apple.com
+  --apn-host host
+    APN Server host (defaults to gateway.push.apple.com)
+    Use 'sandbox' to connect to gateway.sandbox.push.apple.com
 
   --apn-port port of the APN Server
     APN server port (defaults to 2195)
@@ -48,7 +48,7 @@ Usage: apnmachined [options] --pem /full/path/to/pem
 
   --pem-passphrase passphrase
     The PEM passphrase to decode key.
-		Default to nil
+    Default to nil
 
   --help
     usage message
@@ -60,7 +60,7 @@ Usage: apnmachined [options] --pem /full/path/to/pem
 
 h2. Sending Notifications from Ruby
 
-To send a notification, you just need a working Redis client that responds to rpush. It doesn't matter if you're 
+To send a notification, you just need a working Redis client that responds to rpush. It doesn't matter if you're
 in an EventMachine program or a plain vanilla Rails app.
 
 <pre>
@@ -70,12 +70,12 @@ in an EventMachine program or a plain vanilla Rails app.
   </code>
 </pre>
 
-Finally: 
+Finally:
 
 <pre>
   <code>
   notification = ApnMachine::Notification.new
-  notification.device_token = apns_token 
+  notification.device_token = apns_token
   notification.alert = message
   notification.badge = 1
   notification.sound = 'default'
