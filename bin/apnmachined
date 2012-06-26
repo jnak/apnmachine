@@ -60,7 +60,7 @@ opts.each do |opt, arg|
     redis_host = arg
   when '--redis-port'
     redis_port = arg.to_i
-  when '--apn_host'
+  when '--apn-host'
     if arg == 'sandbox'
       apn_host = 'gateway.sandbox.push.apple.com'
     else
