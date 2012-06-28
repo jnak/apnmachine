@@ -11,6 +11,7 @@ def usage
   puts " --pem-passphrase path/to/pem         path to pem passphrase"
   puts " --redis-host [127.0.0.1]             bind address of proxy"
   puts " --redis-port [6379]                  port proxy listens on"
+  puts " --redis-url [redis://username:pas127.0.0.1:] url of proxy"
   puts " --log </var/log/apnmachined.log      the path to store the log"
   puts " --daemon                             to daemonize the server (include full path for pem files then)"
   puts " --apn-host <gateway.push.apple.com>  the apn server host (use 'sandbox' to use apple sandboxes)"
@@ -31,6 +32,7 @@ end
 opts = GetoptLong.new(
   ["--redis-host", "-a", GetoptLong::REQUIRED_ARGUMENT],
   ["--redis-port", "-p", GetoptLong::REQUIRED_ARGUMENT],
+  ["--redis-uri", "-u", GetoptLong::REQUIRED_ARGUMENT],
   ["--apn-host", "-b", GetoptLong::REQUIRED_ARGUMENT],
   ["--apn-port", "-q", GetoptLong::REQUIRED_ARGUMENT],
   ["--log", "-l", GetoptLong::REQUIRED_ARGUMENT],
@@ -42,6 +44,7 @@ opts = GetoptLong.new(
 
 redis_host = '127.0.0.1'
 redis_port = 6379
+redis_uri = nil
 apn_host = 'gateway.push.apple.com'
 apn_port = 2195
 pem = nil
@@ -60,6 +63,8 @@ opts.each do |opt, arg|
     redis_host = arg
   when '--redis-port'
     redis_port = arg.to_i
+  when '--redis-uri'
+    redis_uri = arg
   when '--apn-host'
     if arg == 'sandbox'
       apn_host = 'gateway.sandbox.push.apple.com'
@@ -84,6 +89,6 @@ if pem.nil?
   exit 1
 else
   daemonize if daemon
-  server = ApnMachine::Server::Server.new(pem, pem_passphrase, redis_host, redis_port, apn_host, apn_port, log)
+  server = ApnMachine::Server::Server.new(pem, pem_passphrase, redis_host, redis_port, redis_uri, apn_host, apn_port, log)
   server.start!
 end
