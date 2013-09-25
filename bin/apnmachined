@@ -7,16 +7,15 @@ require 'apnmachine'
 require 'apnmachine/server'
 
 def usage
-  puts "Usage: apnmchined [switches] --pem path/to/pem"
-  puts " --pem-passphrase path/to/pem         path to pem passphrase"
+  puts "Usage: apnmchined"
   puts " --redis-host [127.0.0.1]             bind address of proxy"
   puts " --redis-port [6379]                  port proxy listens on"
   puts " --redis-url [redis://username:pas127.0.0.1:] url of proxy"
   puts " --log </var/log/apnmachined.log      the path to store the log"
-  puts " --daemon                             to daemonize the server (include full path for pem files then)"
+  puts " --pem-passphrase path/to/pem         path to pem passphrase"
+  puts " --daemon or -d                       to daemonize the server (include full path for pem files then)"
   puts " --apn-host <gateway.push.apple.com>  the apn server host (use 'sandbox' to use apple sandboxes)"
-  puts " --apn-port <gateway.push.apple.com>  the apn server port "
-  puts " --help                               this message"
+  puts " --apn-port <2195>                    the apn server port "
 end
 
 def daemonize
