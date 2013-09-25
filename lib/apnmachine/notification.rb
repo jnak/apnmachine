@@ -3,17 +3,22 @@ require 'yajl' unless defined?(Yajl)
 module ApnMachine
   class Notification
 
+    # Attributes used to 'build' the nofication
     attr_accessor :device_token, :alert, :badge, :sound, :custom
 
     PAYLOAD_MAX_BYTES = 256
     class PayloadTooLarge < StandardError;end
     class NoDeviceToken < StandardError;end
+    class NoRedisClient < StandardError;end
 
+    # Encodes the notification (serialise a JSON object)
     def encode_payload
       p = {:aps => Hash.new}
       [:badge, :alert, :sound].each do |k|
         p[:aps][k] = send(k) if send(k)
       end
+
+      # custom payload data used to set context or internal data
       p.merge!(custom) if send(:custom)
 
       j = Yajl::Encoder.encode(p)
@@ -25,11 +30,15 @@ module ApnMachine
       Yajl::Encoder.encode(p)
     end
 
+    # Sends the encoded payload from a ruby client to the redis server
     def push
-      raise 'No Redis client' if Config.redis.nil?
+      raise NoRedisClient if Config.redis.nil?
       socket = Config.redis.rpush "apnmachine.queue", encode_payload
     end
 
+    # Class method used by server to prepare notifs before pushing them
+    #
+    # @param encoded_payload [Hash serialised/encoded]
     def self.to_bytes(encoded_payload)
       notif_hash = Yajl::Parser.parse(encoded_payload)
 
@@ -42,6 +51,7 @@ module ApnMachine
 
       Config.logger.debug "TOKEN:#{device_token} | ALERT:#{notif_hash.inspect}"
 
+      # See APN protocol doc
       [0, 0, bin_token.size, bin_token, 0, j.size, j].pack("ccca*cca*")
     end
 

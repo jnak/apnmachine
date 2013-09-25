@@ -1,6 +1,8 @@
 module ApnMachine
   module Server
     class Response
+
+      # TODO Implement feedback service using this skeleton
       def initialize(notification)
         @notification = notification
       end

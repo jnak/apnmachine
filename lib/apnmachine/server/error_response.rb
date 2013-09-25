@@ -2,6 +2,8 @@ module ApnMachine
   module Server
     class ErrorResponse
     
+
+      # See APN protocol doc
       DESCRIPTION = {
         0   => "No errors encountered",
         1   => "Processing error",
@@ -12,6 +14,7 @@ module ApnMachine
         6   => "Invalid topic size",
         7   => "Invalid payload size",
         8   => "Invalid token",
+        10  => "Shutdown",
         255 => "None (unknown)"
       }
 
